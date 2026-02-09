@@ -80,8 +80,13 @@ void Scene::Updata() {
 
 			//敵とプレイヤー
 			if (circleToCircleHitJudge(player.GetPos(), enemy[i]->GetPos(), player.GetRadius(), enemy[i]->GetRadius())) {
-				isClear = false;
-				gameScene = RESULT;
+				enemy[i]->Initialize();
+				if (!player.GetIsSpecial()) {
+					isClear = false;
+					gameScene = RESULT;
+				}
+
+
 
 			}
 
