@@ -51,17 +51,7 @@ void Scene::Updata() {
 			}
 
 		}	
-		bullet.Updata();
-
-
-
-		if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
-			if (!bullet.GetIsActive()) {
-				bullet.Initialize(player.GetPos());
-				bullet.SetIsActive(true);
-			}
-
-		}
+		
 
 
 		//========================================================================================
@@ -71,9 +61,9 @@ void Scene::Updata() {
 		
 		for (int i = 0; i < maxEnemy; i++) {
 			//敵と弾
-			if (circleToCircleHitJudge(bullet.GetPos(),enemy[i]->GetPos(),bullet.GetRadius(),enemy[i]->GetRadius())) {
+			if (circleToCircleHitJudge(player.bullet.GetPos(),enemy[i]->GetPos(), player.bullet.GetRadius(),enemy[i]->GetRadius())) {
 				score_ += enemy[i]->GetScore();
-				bullet.Initialize({-500.0f,-500.0f});
+				player.bullet.Initialize({-500.0f,-500.0f});
 				enemy[i]->Initialize();
 
 			}
@@ -110,7 +100,7 @@ void Scene::Updata() {
 		if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
 			gameScene = MAIN_GAME;
 			player.Initialize();
-			bullet.Initialize({ -500.0f, -500.0f });
+			player.bullet.Initialize({ -500.0f, -500.0f });
 			for (int i = 0; i < maxEnemy; i++) {
 				enemy[i]->Initialize();
 			}
@@ -134,7 +124,7 @@ void Scene::Draw() {
 		break;
 	case Scene::MAIN_GAME:
 
-		bullet.Draw();
+
 
 		for (int i = 0; i < maxEnemy; i++) {
 			enemy[i]->Draw();
@@ -144,7 +134,6 @@ void Scene::Draw() {
 
 
 		Novice::ScreenPrintf(0, 0, "score = %d", score_);
-		Novice::ScreenPrintf(0, 20, "bullet = %d", bullet.GetIsActive());
 		break;
 
 	case Scene::RESULT:

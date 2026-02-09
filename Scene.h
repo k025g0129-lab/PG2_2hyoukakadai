@@ -22,7 +22,7 @@ private:
 
 	GameScene gameScene;
 	Player player;
-	Bullet bullet = Bullet({-500.0f,-500.0f});
+
 
 
 	static const int maxEnemy = 60;

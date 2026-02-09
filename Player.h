@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Vector.h"
+#include "Bullet.h"
 
 class Player {
 public:
@@ -14,6 +15,9 @@ public:
 
 	int GetIsSpecial();
 
+	Bullet bullet = Bullet({ -500.0f,-500.0f });
+
+
 private:
 	Vector2 pos_;
 	float moveSpeed_;
@@ -25,6 +29,7 @@ private:
 
 	char keys[256] = { 0 };
 	char preKeys[256] = { 0 };
+
 
 	enum RGBColor {
 		Red,

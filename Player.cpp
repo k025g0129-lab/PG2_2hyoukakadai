@@ -25,6 +25,8 @@ void Player::Updata() {
 	Novice::GetHitKeyStateAll(keys);
 	coolTime_--;
 
+	bullet.Updata();
+
 	//移動処理
 	if (keys[DIK_W]) {
 		pos_.y -= moveSpeed_;
@@ -40,6 +42,15 @@ void Player::Updata() {
 
 	if (keys[DIK_D]) {
 		pos_.x += moveSpeed_;
+	}
+
+
+	//弾発射
+	if (keys[DIK_SPACE] && !preKeys[DIK_SPACE]) {
+		if (!bullet.GetIsActive()) {
+			bullet.Initialize(pos_);
+			bullet.SetIsActive(true);
+		}
 	}
 
 	//特殊行動
@@ -117,7 +128,7 @@ void Player::Updata() {
 }
 
 void Player::Draw() {
-
+	bullet.Draw();
 
 	Novice::DrawEllipse(
 		static_cast<int>(pos_.x),
